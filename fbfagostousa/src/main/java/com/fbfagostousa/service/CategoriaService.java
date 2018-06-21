@@ -10,6 +10,9 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    public void votar(){
+        System.out.println("Has votado !!!");
+    }
 
 
 }

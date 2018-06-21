@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class fakemock {
+public class Fakemock {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -28,12 +28,8 @@ public class fakemock {
     @Autowired
     private CategoriaRestoranRepository categoriaRestoranRepository;
 
-
-    @PostConstruct
-    private void IngresarRestoranesyCategorias(){
-
-
-
+    //@PostConstruct
+    public void IngresarRestoranesyCategorias(){
 
         Categoria categoria1= new CategoriaBuilder.Builder().setDescripcion("Atiende a las personas del restoran")
                                                             .setNombre("Garzon del restoran")
@@ -78,8 +74,6 @@ public class fakemock {
 
 
         categoriaRestoranRepository.save(categoriaRestoran);
-
-
 
     }
 
