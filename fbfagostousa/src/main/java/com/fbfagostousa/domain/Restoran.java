@@ -1,7 +1,10 @@
 package com.fbfagostousa.domain;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import org.hibernate.annotations.NaturalIdCache;
@@ -14,13 +17,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(
         usage = CacheConcurrencyStrategy.READ_WRITE
 )
-public class Restoran {
+public class Restoran  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "restoran")
+    @JsonIgnore
     private List<CategoriaRestoran> categorias=new ArrayList<>();
 
     @Column
@@ -63,4 +67,6 @@ public class Restoran {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+
 }

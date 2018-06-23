@@ -1,10 +1,11 @@
 package com.fbfagostousa.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class CategoriaRestoran {
+public class CategoriaRestoran implements Serializable {
 
     @EmbeddedId
     private CategoriaRestoranId id;

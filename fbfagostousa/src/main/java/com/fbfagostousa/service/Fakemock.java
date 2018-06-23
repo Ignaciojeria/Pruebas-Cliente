@@ -28,7 +28,7 @@ public class Fakemock {
     @Autowired
     private CategoriaRestoranRepository categoriaRestoranRepository;
 
-    //@PostConstruct
+    @PostConstruct
     public void IngresarRestoranesyCategorias(){
 
         Categoria categoria1= new CategoriaBuilder.Builder().setDescripcion("Atiende a las personas del restoran")

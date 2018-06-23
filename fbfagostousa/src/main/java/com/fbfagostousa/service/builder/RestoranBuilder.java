@@ -1,6 +1,5 @@
 package com.fbfagostousa.service.builder;
 
-import com.fbfagostousa.domain.Categoria;
 import com.fbfagostousa.domain.CategoriaRestoran;
 import com.fbfagostousa.domain.Restoran;
 
