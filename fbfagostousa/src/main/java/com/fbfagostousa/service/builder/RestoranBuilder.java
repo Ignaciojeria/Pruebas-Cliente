@@ -1,7 +1,7 @@
 package com.fbfagostousa.service.builder;
 
-import com.fbfagostousa.domain.CategoriaRestoran;
-import com.fbfagostousa.domain.Restoran;
+import com.fbfagostousa.domain.core.CategoriaRestoran;
+import com.fbfagostousa.domain.core.Restoran;
 
 import java.util.List;
 

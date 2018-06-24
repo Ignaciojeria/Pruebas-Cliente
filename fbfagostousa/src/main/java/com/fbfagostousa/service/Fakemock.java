@@ -1,9 +1,9 @@
 package com.fbfagostousa.service;
 
-import com.fbfagostousa.domain.Categoria;
-import com.fbfagostousa.domain.CategoriaRestoran;
-import com.fbfagostousa.domain.CategoriaRestoranId;
-import com.fbfagostousa.domain.Restoran;
+import com.fbfagostousa.domain.core.Categoria;
+import com.fbfagostousa.domain.core.CategoriaRestoran;
+import com.fbfagostousa.domain.core.CategoriaRestoranId;
+import com.fbfagostousa.domain.core.Restoran;
 import com.fbfagostousa.repository.CategoriaRepository;
 import com.fbfagostousa.repository.CategoriaRestoranRepository;
 import com.fbfagostousa.repository.RestoranRepository;

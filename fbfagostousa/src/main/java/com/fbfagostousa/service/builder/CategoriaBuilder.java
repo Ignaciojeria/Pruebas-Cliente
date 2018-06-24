@@ -1,6 +1,6 @@
 package com.fbfagostousa.service.builder;
 
-import com.fbfagostousa.domain.Categoria;
+import com.fbfagostousa.domain.core.Categoria;
 
 public class CategoriaBuilder {
     /**

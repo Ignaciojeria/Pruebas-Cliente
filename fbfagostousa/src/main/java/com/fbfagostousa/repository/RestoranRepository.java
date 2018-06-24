@@ -1,6 +1,6 @@
 package com.fbfagostousa.repository;
 
-import com.fbfagostousa.domain.Restoran;
+import com.fbfagostousa.domain.core.Restoran;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

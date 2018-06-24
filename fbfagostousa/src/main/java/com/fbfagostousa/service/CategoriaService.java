@@ -1,17 +1,12 @@
 package com.fbfagostousa.service;
 
-import com.fbfagostousa.domain.Categoria;
-import com.fbfagostousa.domain.CategoriaRestoranId;
+import com.fbfagostousa.domain.core.Categoria;
 import com.fbfagostousa.exception.CategoriaIdNotFoundException;
-import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service

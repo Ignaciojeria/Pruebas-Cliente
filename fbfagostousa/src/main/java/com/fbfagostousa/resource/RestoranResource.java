@@ -1,7 +1,7 @@
 package com.fbfagostousa.resource;
 
-import com.fbfagostousa.domain.CategoriaRestoranId;
-import com.fbfagostousa.domain.Restoran;
+import com.fbfagostousa.domain.core.CategoriaRestoranId;
+import com.fbfagostousa.domain.core.Restoran;
 import com.fbfagostousa.exception.CategoriaIdAndRestoranIdNotFoundException;
 import com.fbfagostousa.exception.CategoriaIdNotFoundException;
 import com.fbfagostousa.exception.CategoriaRestoranIdNotFoundException;
@@ -9,9 +9,11 @@ import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.service.CategoriaRestoranService;
 import com.fbfagostousa.service.RestoranService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/restoran")
@@ -22,6 +24,7 @@ public class RestoranResource {
 
     @Autowired
     private CategoriaRestoranService categoriaRestoranService;
+
 
     @GetMapping("{restoranId}")
     public Restoran findById(@PathVariable Long restoranId) throws RestoranIdNotFoundException {

@@ -1,4 +1,4 @@
-package com.fbfagostousa.domain;
+package com.fbfagostousa.domain.core;
 
 
 
