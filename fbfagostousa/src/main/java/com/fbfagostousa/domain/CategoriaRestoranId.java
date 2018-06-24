@@ -1,7 +1,10 @@
 package com.fbfagostousa.domain;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,14 +17,23 @@ public class CategoriaRestoranId implements Serializable {
     @Column
     private Long restoranId;
 
-    @Column
-    private Long puntaje;
+    //Ignora el atributo y lo considera como un transiente en la tabla embebbida , es decir, no se mapea a la tabla.
+    // El atributo que enrealidad se mape es el puntaje de CategoriaRestoran y este transiente es una representacion,
+    //valga la redundancia, transiente del puntaje de la tabla CategoriaRestoran
+    @Transient
+    private Long puntajeTransiente;
 
     public CategoriaRestoranId(){}
 
     public CategoriaRestoranId(Long categoriaId, Long restoranId){
         this.categoriaId=categoriaId;
         this.restoranId=restoranId;
+    }
+
+    public CategoriaRestoranId(Long categoriaId, Long restoranId,Long puntajeTransiente){
+        this.categoriaId=categoriaId;
+        this.restoranId=restoranId;
+        this.puntajeTransiente=puntajeTransiente;
     }
 
 
@@ -42,13 +54,7 @@ public class CategoriaRestoranId implements Serializable {
         return Objects.hash(categoriaId, restoranId);
     }
 
-    public Long getPuntaje() {
-        return puntaje;
-    }
 
-    public void setPuntaje(Long puntaje) {
-        this.puntaje = puntaje;
-    }
 
     public Long getCategoriaId() {
         return categoriaId;
@@ -65,4 +71,15 @@ public class CategoriaRestoranId implements Serializable {
     public void setRestoranId(Long restoranId) {
         this.restoranId = restoranId;
     }
+
+    public Long getPuntajeTransiente() {
+        return puntajeTransiente;
+    }
+
+    public void setPuntajeTransiente(Long puntajeTransiente) {
+        this.puntajeTransiente = puntajeTransiente;
+    }
+
+
+
 }

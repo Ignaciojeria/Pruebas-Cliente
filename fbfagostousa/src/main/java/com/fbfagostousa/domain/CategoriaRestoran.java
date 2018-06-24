@@ -17,6 +17,9 @@ public class CategoriaRestoran implements Serializable {
     @MapsId("categoriaId")
     private Categoria categoria;
 
+    @Column
+    private Long puntaje;
+
     public  CategoriaRestoran(){}
 
     public CategoriaRestoran(Restoran restoran, Categoria categoria) {
@@ -64,5 +67,13 @@ public class CategoriaRestoran implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Long getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Long puntaje) {
+        this.puntaje = puntaje;
     }
 }

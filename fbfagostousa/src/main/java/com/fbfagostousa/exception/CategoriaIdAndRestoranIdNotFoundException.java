@@ -2,7 +2,7 @@ package com.fbfagostousa.exception;
 
 public class CategoriaIdAndRestoranIdNotFoundException extends Exception {
 
-    public static final String DESCRIPTION= " id de categoria + id de restoran no encontrada.";
+    public static final String DESCRIPTION= "Conjunto de claves foraneas que constituyen una clave primaria erroneo";
 
     public CategoriaIdAndRestoranIdNotFoundException(){
         super(DESCRIPTION);

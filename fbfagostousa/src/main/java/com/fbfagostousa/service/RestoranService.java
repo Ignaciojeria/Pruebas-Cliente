@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RestoranService {
@@ -30,9 +31,7 @@ public class RestoranService {
     }
 
     public List<CategoriaRestoranId> findCategoriasRestoranByRestoranId(Long restoranId) throws RestoranIdNotFoundException {
-        List<CategoriaRestoranId> categoriaRestoranIds=new ArrayList<>();
-        this.findById(restoranId).getCategorias().forEach(item->categoriaRestoranIds.add(item.getId()));
-        return categoriaRestoranIds;
+        return  this.findById(restoranId).getCategorias().stream().map(item -> new CategoriaRestoranId(item.getCategoria().getId(),item.getRestoran().getId(),item.getPuntaje())).collect(Collectors.toList());
     }
 
 }

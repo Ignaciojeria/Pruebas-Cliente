@@ -24,7 +24,7 @@ public class CategoriaService {
     @Autowired
     private RestoranService restoranService;
 
-    private Categoria findById(Long id) throws CategoriaIdNotFoundException {
+    public Categoria findById(Long id) throws CategoriaIdNotFoundException {
         Optional<Categoria> optional= categoriaRepository.findById(id);
         if(!optional.isPresent())
             throw new CategoriaIdNotFoundException("La categoria con el id: ".concat(id.toString()).concat(" no existe"));

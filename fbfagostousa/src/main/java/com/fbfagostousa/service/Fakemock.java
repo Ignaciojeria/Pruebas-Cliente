@@ -65,7 +65,7 @@ public class Fakemock {
         CategoriaRestoran categoriaRestoran=new CategoriaRestoran();
 
         CategoriaRestoranId categoriaRestoranId= new CategoriaRestoranId(categoria1.getId(),restoran1.getId());
-        categoriaRestoranId.setPuntaje(0L);
+        categoriaRestoran.setPuntaje(0L);
         categoriaRestoran.setRestoran(restoran1);
         categoriaRestoran.setCategoria(categoria1);
         categoriaRestoran.setId(categoriaRestoranId);
