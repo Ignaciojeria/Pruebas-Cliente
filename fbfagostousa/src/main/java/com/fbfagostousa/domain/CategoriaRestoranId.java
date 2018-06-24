@@ -49,4 +49,20 @@ public class CategoriaRestoranId implements Serializable {
     public void setPuntaje(Long puntaje) {
         this.puntaje = puntaje;
     }
+
+    public Long getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Long categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+
+    public Long getRestoranId() {
+        return restoranId;
+    }
+
+    public void setRestoranId(Long restoranId) {
+        this.restoranId = restoranId;
+    }
 }

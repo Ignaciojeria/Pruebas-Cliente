@@ -1,11 +1,13 @@
 package com.fbfagostousa.service;
 
+import com.fbfagostousa.domain.CategoriaRestoranId;
 import com.fbfagostousa.domain.Restoran;
 import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.repository.RestoranRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,12 @@ public class RestoranService {
 
     public List<Restoran> findAll(){
         return restoranRepository.findAll();
+    }
+
+    public List<CategoriaRestoranId> findCategoriasRestoranByRestoranId(Long restoranId) throws RestoranIdNotFoundException {
+        List<CategoriaRestoranId> categoriaRestoranIds=new ArrayList<>();
+        this.findById(restoranId).getCategorias().forEach(item->categoriaRestoranIds.add(item.getId()));
+        return categoriaRestoranIds;
     }
 
 }

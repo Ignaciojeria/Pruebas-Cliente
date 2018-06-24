@@ -1,5 +1,4 @@
 package com.fbfagostousa.domain;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
