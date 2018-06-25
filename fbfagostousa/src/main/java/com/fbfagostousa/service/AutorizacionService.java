@@ -20,6 +20,7 @@ public class AutorizacionService {
         List<Role> listaDeRoles=autorizacionRepository.findRoleByUsuario(usuario);
         if(listaDeRoles.isEmpty())
             listaDeRoles= Arrays.asList(Role.AUTHENTICATED);
+
         return listaDeRoles;
     }
 }

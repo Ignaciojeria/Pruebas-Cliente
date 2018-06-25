@@ -5,6 +5,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Embeddable
@@ -17,7 +18,7 @@ public class Token {
     private LocalDate fechaCreacionToken;
 
     @Column
-    private LocalDateTime horaCreacionToken;
+    private LocalTime horaCreacionToken;
 
     public Token(){
         //Encriptamos el valor del token con la Clase Encrypting del paquete users
@@ -41,17 +42,17 @@ public class Token {
         this.fechaCreacionToken = fechaCreacionToken;
     }
 
-    public LocalDateTime getHoraCreacionToken() {
+    public LocalTime getHoraCreacionToken() {
         return horaCreacionToken;
     }
 
-    public void setHoraCreacionToken(LocalDateTime horaCreacionToken) {
+    public void setHoraCreacionToken(LocalTime horaCreacionToken) {
         this.horaCreacionToken = horaCreacionToken;
     }
 
     private void setValue(String value){
         this.fechaCreacionToken=LocalDate.now();
-        this.horaCreacionToken=LocalDateTime.now();
+        this.horaCreacionToken=LocalTime.now();
         this.valorToken=value;
     }
 }

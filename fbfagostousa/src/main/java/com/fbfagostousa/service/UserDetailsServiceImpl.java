@@ -7,9 +7,11 @@ import java.util.Optional;
 
 import com.fbfagostousa.domain.users.Role;
 import com.fbfagostousa.domain.users.Usuario;
+import com.fbfagostousa.exception.UsuarioValorTokenNotFoundException;
 import com.fbfagostousa.repository.AutorizacionRepository;
 import com.fbfagostousa.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 @Service
@@ -31,6 +35,8 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
     @Autowired
     private AutorizacionService autorizacionService;
 
+
+
     //Si se hace autenticación por facebook o google el filtro debería ser el mismo!.
     //El login de facebook/google debería encargarse de persistir y retornar el toker correspondiente para
     //la autenticación!.
@@ -39,12 +45,20 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String valorToken) throws UsernameNotFoundException {
 
-        Usuario usuario= this.usuarioService.findByValorToken(valorToken);
-
-        List<Role> listaDeRoles= autorizacionService.findRoleByUsuario(usuario);
-
+        Usuario usuario= null;
+        List<Role> listaDeRoles=new ArrayList<>();
+        try {
+            usuario = this.usuarioService.findByValorToken(valorToken);
+        } catch (UsuarioValorTokenNotFoundException e) {
+            listaDeRoles= Arrays.asList(Role.ANONYMOUS);
+            return this.userBuilder(valorToken,new BCryptPasswordEncoder().encode(""),listaDeRoles);
+        }
+        listaDeRoles= autorizacionService.findRoleByUsuario(usuario);
         return this.userBuilder(valorToken,new BCryptPasswordEncoder().encode(""),listaDeRoles);
+
     }
+
+
 
     //Este es el retorno de usuario que utiliza spring como referencia
     //(no persiste ni busca nada en la base de datos, es sólo un envolvente de nuestro filtro de seguridad que reconoce spring)

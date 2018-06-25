@@ -1,11 +1,9 @@
 package com.fbfagostousa.exception.handler;
 
-import com.fbfagostousa.exception.CategoriaIdAndRestoranIdNotFoundException;
-import com.fbfagostousa.exception.CategoriaIdNotFoundException;
-import com.fbfagostousa.exception.CategoriaRestoranIdNotFoundException;
-import com.fbfagostousa.exception.RestoranIdNotFoundException;
+import com.fbfagostousa.exception.*;
 import com.fbfagostousa.exception.message.ErrorMessage;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,9 +20,17 @@ public class ApiExceptionHandler {
     @ExceptionHandler({CategoriaIdNotFoundException.class,
                        RestoranIdNotFoundException.class,
                         CategoriaRestoranIdNotFoundException.class,
-                         CategoriaIdAndRestoranIdNotFoundException.class})
+                         CategoriaIdAndRestoranIdNotFoundException.class,
+                         UsernameNotFoundException.class})
     @ResponseBody
-    public ErrorMessage notFountRequest(HttpServletRequest request, Exception exception){
+    public ErrorMessage notFoundRequest(HttpServletRequest request, Exception exception){
+        return  new ErrorMessage(exception,request.getRequestURI());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({AuthorizationHeaderBadRequestException.class})
+    @ResponseBody
+    public ErrorMessage badRequest(HttpServletRequest request, Exception exception){
         return  new ErrorMessage(exception,request.getRequestURI());
     }
 }
