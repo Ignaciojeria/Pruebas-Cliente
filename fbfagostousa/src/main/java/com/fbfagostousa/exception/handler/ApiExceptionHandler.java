@@ -28,7 +28,8 @@ public class ApiExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({AuthorizationHeaderBadRequestException.class})
+    @ExceptionHandler({AuthorizationHeaderBadRequestException.class,
+                        UserRequestFieldBadRequestException.class})
     @ResponseBody
     public ErrorMessage badRequest(HttpServletRequest request, Exception exception){
         return  new ErrorMessage(exception,request.getRequestURI());

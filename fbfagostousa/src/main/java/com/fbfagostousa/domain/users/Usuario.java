@@ -1,7 +1,11 @@
 package com.fbfagostousa.domain.users;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+//El cliente puede transportar sólo lo que necesita enviar
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Usuario {
 
     @Id

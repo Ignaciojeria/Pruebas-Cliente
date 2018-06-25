@@ -3,6 +3,7 @@ package com.fbfagostousa.service;
 import com.fbfagostousa.domain.users.Token;
 import com.fbfagostousa.domain.users.Usuario;
 import com.fbfagostousa.exception.AuthorizationHeaderBadRequestException;
+import com.fbfagostousa.exception.UserRequestFieldBadRequestException;
 import com.fbfagostousa.exception.UsuarioValorTokenNotFoundException;
 import com.fbfagostousa.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UsuarioService {
         Optional<Usuario> usuarioOptional= this.usuarioRepository.findByValorToken(valorToken);
 
         if(!usuarioOptional.isPresent())
-            throw new UsuarioValorTokenNotFoundException("");
+            throw new UsuarioValorTokenNotFoundException("Sin autorizacion");
 
         return usuarioOptional.get();
     }
@@ -45,14 +46,34 @@ public class UsuarioService {
     return usuarioRepository.save(usuarioOptional.get());
     }
 
-    public Usuario poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(HttpHeaders httpHeaders) throws AuthorizationHeaderBadRequestException {
+    public Usuario poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(HttpHeaders httpHeaders,Usuario requestbody) throws AuthorizationHeaderBadRequestException, UsuarioValorTokenNotFoundException, UserRequestFieldBadRequestException {
+
+        if(requestbody.getNombre()==null)
+            throw new UserRequestFieldBadRequestException("Falta el atributo 'nombre' en el cuerpo de la solicitud HTTP ");
+        if(requestbody.getTelefono()==null)
+            throw new UserRequestFieldBadRequestException("Falta el atributo 'telefono' en el cuerpo de la solicitud HTTP ");
+        if(requestbody.getPais()==null)
+            throw new UserRequestFieldBadRequestException("Falta el atributo 'pais' en el cuerpo de la solicitud HTTP ");
+        if(requestbody.getEstado()==null)
+            throw new UserRequestFieldBadRequestException("Falta el atributo 'estado' en el cuerpo de la solicitud HTTP ");
+        if(requestbody.getCiudad()==null)
+            throw new UserRequestFieldBadRequestException("Falta el atributo 'ciudad' en el cuerpo de la solicitud HTTP ");
+
 
         if(!httpHeaders.containsKey("Authorization"))
             throw new AuthorizationHeaderBadRequestException("");
 
         String valorToken=  httpHeaders.get("Authorization").get(0);
-        System.out.println(valorToken);
-        return null;
+
+       Usuario usuario= this.findByValorToken(valorToken);
+
+       usuario.setNombre(requestbody.getNombre());
+       usuario.setTelefono(requestbody.getTelefono());
+       usuario.setPais(requestbody.getPais());
+       usuario.setEstado(requestbody.getEstado());
+       usuario.setCiudad(requestbody.getCiudad());
+
+        return usuarioRepository.save(usuario);
     }
 
 }

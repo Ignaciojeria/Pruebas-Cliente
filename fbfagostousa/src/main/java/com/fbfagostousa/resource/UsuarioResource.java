@@ -2,6 +2,8 @@ package com.fbfagostousa.resource;
 
 import com.fbfagostousa.domain.users.Usuario;
 import com.fbfagostousa.exception.AuthorizationHeaderBadRequestException;
+import com.fbfagostousa.exception.UserRequestFieldBadRequestException;
+import com.fbfagostousa.exception.UsuarioValorTokenNotFoundException;
 import com.fbfagostousa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,9 +21,10 @@ public class UsuarioResource {
         return usuarioService.ingresarConEmail(email);
     }
 
-    @PostMapping("/ingresarDatos")
-    public Usuario poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(@RequestHeader HttpHeaders headers) throws AuthorizationHeaderBadRequestException {
-        return usuarioService.poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(headers);
+    @PutMapping
+    public Usuario poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(@RequestHeader HttpHeaders headers, @RequestBody Usuario usuario ) throws AuthorizationHeaderBadRequestException, UsuarioValorTokenNotFoundException, UserRequestFieldBadRequestException {
+        System.out.println(usuario.getCiudad());
+        return usuarioService.poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(headers,usuario);
     }
 
 }
