@@ -23,6 +23,9 @@ public class Restoran  implements Serializable {
     @Column
     private String nombre;
 
+    @OneToMany
+    private List<Garzon> garzones;
+
     @Column
     private String descripcion;
 

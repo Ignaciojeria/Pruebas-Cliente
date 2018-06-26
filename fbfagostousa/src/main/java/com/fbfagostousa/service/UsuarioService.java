@@ -46,6 +46,20 @@ public class UsuarioService {
     return usuarioRepository.save(usuarioOptional.get());
     }
 
+    public Usuario IngresarConEmailPosicionadoEnLaCategoriaDeUnRestoranPorSuCodigoQr(String email, Long categoriaId, Long restoranId){
+        String lowerCaseEmail=email.toLowerCase();
+        Optional<Usuario> usuarioOptional= usuarioRepository.findByEmail(lowerCaseEmail);
+        if(!usuarioOptional.isPresent()){
+            Usuario usuario= new Usuario();
+            usuario.setEmail(lowerCaseEmail);
+            usuario.setToken(new Token(restoranId,categoriaId));
+            return usuarioRepository.save(usuario);
+        }
+
+        usuarioOptional.get().setToken(new Token(restoranId,categoriaId));
+        return usuarioRepository.save(usuarioOptional.get());
+    }
+
     public Usuario poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(HttpHeaders httpHeaders,Usuario requestbody) throws AuthorizationHeaderBadRequestException, UsuarioValorTokenNotFoundException, UserRequestFieldBadRequestException {
 
         if(requestbody.getNombre()==null)

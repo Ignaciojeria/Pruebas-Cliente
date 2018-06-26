@@ -1,6 +1,7 @@
 package com.fbfagostousa.domain.core;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +17,11 @@ public class CategoriaRestoran implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("categoriaId")
     private Categoria categoria;
+
+    @OneToOne
+    private SubCategoria subCategoria;
+
+
 
     @Column
     private Long puntaje;
