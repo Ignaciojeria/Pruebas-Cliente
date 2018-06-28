@@ -18,7 +18,10 @@ public class Restoran  implements Serializable {
 
     @OneToMany(mappedBy = "restoran")
     @JsonIgnore
-    private List<CategoriaRestoran> categorias=new ArrayList<>();
+    private List<PlatoRestoran> platos=new ArrayList<>();
+
+    @ManyToMany
+    private List<Categoria> categorias;
 
     @Column
     private String nombre;
@@ -40,12 +43,12 @@ public class Restoran  implements Serializable {
     }
 
 
-    public List<CategoriaRestoran> getCategorias() {
-        return categorias;
+    public List<PlatoRestoran> getplatos() {
+        return platos;
     }
 
-    public void setCategorias(List<CategoriaRestoran> categorias) {
-        this.categorias = categorias;
+    public void setplatos(List<PlatoRestoran> platos) {
+        this.platos = platos;
     }
 
     public String getNombre() {

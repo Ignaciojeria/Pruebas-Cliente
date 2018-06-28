@@ -17,10 +17,10 @@ public class ApiExceptionHandler {
     //Acá se agrupa el conjunto de clases de excepciones que aplican al HttpStatus.NOT_FOUND.
     //Esas excepciones son desencadenadas por la lógica de negocio en el servicio
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({CategoriaIdNotFoundException.class,
+    @ExceptionHandler({PlatoIdNotFoundException.class,
                        RestoranIdNotFoundException.class,
-                        CategoriaRestoranIdNotFoundException.class,
-                         CategoriaIdAndRestoranIdNotFoundException.class,
+                        PlatoRestoranIdNotFoundException.class,
+                         PlatoIdAndRestoranIdNotFoundException.class,
                          UsernameNotFoundException.class})
     @ResponseBody
     public ErrorMessage notFoundRequest(HttpServletRequest request, Exception exception){

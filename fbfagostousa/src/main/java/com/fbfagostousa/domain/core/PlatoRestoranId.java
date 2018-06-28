@@ -9,29 +9,29 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class CategoriaRestoranId implements Serializable {
+public class PlatoRestoranId implements Serializable {
 
     @Column
-    private Long categoriaId;
+    private Long platoId;
 
     @Column
     private Long restoranId;
 
     //Ignora el atributo y lo considera como un transiente en la tabla embebbida , es decir, no se mapea a la tabla.
-    // El atributo que enrealidad se mape es el puntaje de CategoriaRestoran y este transiente es una representacion,
-    //valga la redundancia, transiente del puntaje de la tabla CategoriaRestoran
+    // El atributo que enrealidad se mape es el puntaje de PlatoRestoran y este transiente es una representacion,
+    //valga la redundancia, transiente del puntaje de la tabla PlatoRestoran
     @Transient
     private Long puntajeTransiente;
 
-    public CategoriaRestoranId(){}
+    public PlatoRestoranId(){}
 
-    public CategoriaRestoranId(Long categoriaId, Long restoranId){
-        this.categoriaId=categoriaId;
+    public PlatoRestoranId(Long platoId, Long restoranId){
+        this.platoId=platoId;
         this.restoranId=restoranId;
     }
 
-    public CategoriaRestoranId(Long categoriaId, Long restoranId,Long puntajeTransiente){
-        this.categoriaId=categoriaId;
+    public PlatoRestoranId(Long platoId, Long restoranId, Long puntajeTransiente){
+        this.platoId=platoId;
         this.restoranId=restoranId;
         this.puntajeTransiente=puntajeTransiente;
     }
@@ -44,24 +44,24 @@ public class CategoriaRestoranId implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        CategoriaRestoranId that = (CategoriaRestoranId) o;
-        return Objects.equals(categoriaId, that.categoriaId) &&
+        PlatoRestoranId that = (PlatoRestoranId) o;
+        return Objects.equals(platoId, that.platoId) &&
                 Objects.equals(restoranId, that.restoranId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoriaId, restoranId);
+        return Objects.hash(platoId, restoranId);
     }
 
 
 
-    public Long getCategoriaId() {
-        return categoriaId;
+    public Long getplatoId() {
+        return platoId;
     }
 
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setplatoId(Long platoId) {
+        this.platoId = platoId;
     }
 
     public Long getRestoranId() {

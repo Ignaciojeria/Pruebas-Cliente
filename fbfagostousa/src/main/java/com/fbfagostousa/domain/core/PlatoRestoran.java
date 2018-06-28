@@ -1,37 +1,37 @@
 package com.fbfagostousa.domain.core;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class CategoriaRestoran implements Serializable {
+public class PlatoRestoran implements Serializable {
 
     @EmbeddedId
-    private CategoriaRestoranId id;
+    private PlatoRestoranId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("restoranId")
     private Restoran restoran;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("categoriaId")
-    private Categoria categoria;
+    @MapsId("platoId")
+    private Plato plato;
 
+    /*
     @OneToOne
     private SubCategoria subCategoria;
-
+*/
 
 
     @Column
-    private Long puntaje;
+    private Long puntajeTotal;
 
-    public  CategoriaRestoran(){}
+    public PlatoRestoran(){}
 
-    public CategoriaRestoran(Restoran restoran, Categoria categoria) {
+    public PlatoRestoran(Restoran restoran, Plato plato) {
         this.restoran = restoran;
-        this.categoria = categoria;
-        this.id = new CategoriaRestoranId(categoria.getId(), restoran.getId());
+        this.plato = plato;
+        this.id = new PlatoRestoranId(plato.getId(), restoran.getId());
     }
 
     @Override
@@ -41,21 +41,21 @@ public class CategoriaRestoran implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        CategoriaRestoran that = (CategoriaRestoran) o;
-        return Objects.equals(categoria, that.categoria) &&
+        PlatoRestoran that = (PlatoRestoran) o;
+        return Objects.equals(plato, that.plato) &&
                 Objects.equals(restoran, that.restoran);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoria, restoran);
+        return Objects.hash(plato, restoran);
     }
 
-    public CategoriaRestoranId getId() {
+    public PlatoRestoranId getId() {
         return id;
     }
 
-    public void setId(CategoriaRestoranId id) {
+    public void setId(PlatoRestoranId id) {
         this.id = id;
     }
 
@@ -67,19 +67,19 @@ public class CategoriaRestoran implements Serializable {
         this.restoran = restoran;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Plato getPlato() {
+        return plato;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setPlato(Plato plato) {
+        this.plato = plato;
     }
 
     public Long getPuntaje() {
-        return puntaje;
+        return puntajeTotal;
     }
 
     public void setPuntaje(Long puntaje) {
-        this.puntaje = puntaje;
+        this.puntajeTotal = puntaje;
     }
 }

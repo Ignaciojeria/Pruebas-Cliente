@@ -4,9 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+/*@Entity*/
 public class SubCategoria {
-
+/*
     @Id
     private Long id;
 
@@ -72,5 +72,5 @@ public class SubCategoria {
 
     public void setPresentacion(Long presentacion) {
         this.presentacion = presentacion;
-    }
+    }*/
 }

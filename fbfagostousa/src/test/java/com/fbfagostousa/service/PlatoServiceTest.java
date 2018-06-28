@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")//Indicamos que el perfil activo es test!
-public class CategoriaServiceTest {
+public class PlatoServiceTest {
 
     //Inyecta el mock del servicio
     @Autowired

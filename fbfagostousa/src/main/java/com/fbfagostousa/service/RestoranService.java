@@ -1,6 +1,6 @@
 package com.fbfagostousa.service;
 
-import com.fbfagostousa.domain.core.CategoriaRestoranId;
+import com.fbfagostousa.domain.core.PlatoRestoranId;
 import com.fbfagostousa.domain.core.Restoran;
 import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.repository.RestoranRepository;
@@ -29,8 +29,8 @@ public class RestoranService {
         return restoranRepository.findAll();
     }
 
-    public List<CategoriaRestoranId> findCategoriasRestoranByRestoranId(Long restoranId) throws RestoranIdNotFoundException {
-        return  this.findById(restoranId).getCategorias().stream().map(item -> new CategoriaRestoranId(item.getCategoria().getId(),item.getRestoran().getId(),item.getPuntaje())).collect(Collectors.toList());
+    public List<PlatoRestoranId> findPlatosRestoranByRestoranId(Long restoranId) throws RestoranIdNotFoundException {
+        return  this.findById(restoranId).getplatos().stream().map(item -> new PlatoRestoranId(item.getPlato().getId(),item.getRestoran().getId(),item.getPuntaje())).collect(Collectors.toList());
     }
 
 }

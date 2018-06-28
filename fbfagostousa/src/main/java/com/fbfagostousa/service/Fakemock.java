@@ -1,13 +1,13 @@
 package com.fbfagostousa.service;
 
-import com.fbfagostousa.domain.core.Categoria;
-import com.fbfagostousa.domain.core.CategoriaRestoran;
-import com.fbfagostousa.domain.core.CategoriaRestoranId;
+import com.fbfagostousa.domain.core.Plato;
+import com.fbfagostousa.domain.core.PlatoRestoran;
+import com.fbfagostousa.domain.core.PlatoRestoranId;
 import com.fbfagostousa.domain.core.Restoran;
-import com.fbfagostousa.repository.CategoriaRepository;
-import com.fbfagostousa.repository.CategoriaRestoranRepository;
+import com.fbfagostousa.repository.PlatoRepository;
+import com.fbfagostousa.repository.PlatoRestoranRepository;
 import com.fbfagostousa.repository.RestoranRepository;
-import com.fbfagostousa.service.builder.CategoriaBuilder;
+import com.fbfagostousa.service.builder.PlatoBuilder;
 import com.fbfagostousa.service.builder.RestoranBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,29 +18,29 @@ import javax.annotation.PostConstruct;
 public class Fakemock {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private PlatoRepository platoRepository;
 
     @Autowired
     private RestoranRepository restoranRepository;
 
     @Autowired
-    private CategoriaRestoranRepository categoriaRestoranRepository;
+    private PlatoRestoranRepository platoRestoranRepository;
 
     @PostConstruct
     public void IngresarRestoranesyCategorias(){
 
-        Categoria categoria1= new CategoriaBuilder.Builder().setDescripcion("Atiende a las personas del restoran")
+        Plato plato1 = new PlatoBuilder.Builder().setDescripcion("Atiende a las personas del restoran")
                                                             .setNombre("Garzon del restoran")
                                                             .build();
 
-        Categoria categoria2=new CategoriaBuilder.Builder().setDescripcion("Categoria tradicional")
+        Plato plato2 =new PlatoBuilder.Builder().setDescripcion("Plato tradicional")
                                                             .setNombre("Tradicional")
                                                             .build();
 
         //SobreeEscribimos categoria con el retorno de su id.
-        categoria1= categoriaRepository.save(categoria1);
+        plato1 = platoRepository.save(plato1);
 
-       // categoria1= categoriaRepository.save(categoria2);
+       // plato1= categoriaRepository.save(plato2);
 
 
 
@@ -62,16 +62,16 @@ public class Fakemock {
 
 
 
-        CategoriaRestoran categoriaRestoran=new CategoriaRestoran();
+        PlatoRestoran platoRestoran =new PlatoRestoran();
 
-        CategoriaRestoranId categoriaRestoranId= new CategoriaRestoranId(categoria1.getId(),restoran1.getId());
-        categoriaRestoran.setPuntaje(0L);
-        categoriaRestoran.setRestoran(restoran1);
-        categoriaRestoran.setCategoria(categoria1);
-        categoriaRestoran.setId(categoriaRestoranId);
+        PlatoRestoranId platoRestoranId = new PlatoRestoranId(plato1.getId(),restoran1.getId());
+        platoRestoran.setPuntaje(0L);
+        platoRestoran.setRestoran(restoran1);
+        platoRestoran.setPlato(plato1);
+        platoRestoran.setId(platoRestoranId);
 
 
-        categoriaRestoranRepository.save(categoriaRestoran);
+        platoRestoranRepository.save(platoRestoran);
 
     }
 

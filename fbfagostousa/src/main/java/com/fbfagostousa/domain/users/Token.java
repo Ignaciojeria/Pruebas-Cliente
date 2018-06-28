@@ -18,7 +18,7 @@ public class Token {
     private Long restoranId;
 
     @Column
-    private Long categoriaId;
+    private Long platoId;
 
     @Column
     private LocalDate fechaCreacionToken;
@@ -31,9 +31,9 @@ public class Token {
         this.setValue(new Encrypting().encryptInBase64UrlSafe(Long.toString(new Date().getTime())));
     }
 
-    public Token(Long restoranId, Long categoriaId){
+    public Token(Long restoranId, Long platoId){
         this.restoranId=restoranId;
-        this.categoriaId=categoriaId;
+        this.platoId=platoId;
         this.setValue(new Encrypting().encryptInBase64UrlSafe(Long.toString(new Date().getTime())));
     }
 
@@ -70,12 +70,12 @@ public class Token {
         this.restoranId = restoranId;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
+    public Long getplatoId() {
+        return platoId;
     }
 
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setplatoId(Long platoId) {
+        this.platoId = platoId;
     }
 
     private void setValue(String value){

@@ -1,14 +1,14 @@
 package com.fbfagostousa.exception;
 
-public class CategoriaIdAndRestoranIdNotFoundException extends Exception {
+public class PlatoIdAndRestoranIdNotFoundException extends Exception {
 
     public static final String DESCRIPTION= "Conjunto de claves foraneas que constituyen una clave primaria erroneo";
 
-    public CategoriaIdAndRestoranIdNotFoundException(){
+    public PlatoIdAndRestoranIdNotFoundException(){
         super(DESCRIPTION);
     }
 
-    public CategoriaIdAndRestoranIdNotFoundException(String detail){
+    public PlatoIdAndRestoranIdNotFoundException(String detail){
         super(DESCRIPTION+ ", "+ detail);
     }
 }

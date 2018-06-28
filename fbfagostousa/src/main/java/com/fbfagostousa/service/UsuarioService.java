@@ -46,17 +46,17 @@ public class UsuarioService {
     return usuarioRepository.save(usuarioOptional.get());
     }
 
-    public Usuario IngresarConEmailPosicionadoEnLaCategoriaDeUnRestoranPorSuCodigoQr(String email, Long categoriaId, Long restoranId){
+    public Usuario IngresarConEmailPosicionadoEnElPlatoDeUnRestoranPorSuCodigoQr(String email, Long platoId, Long restoranId){
         String lowerCaseEmail=email.toLowerCase();
         Optional<Usuario> usuarioOptional= usuarioRepository.findByEmail(lowerCaseEmail);
         if(!usuarioOptional.isPresent()){
             Usuario usuario= new Usuario();
             usuario.setEmail(lowerCaseEmail);
-            usuario.setToken(new Token(restoranId,categoriaId));
+            usuario.setToken(new Token(restoranId,platoId));
             return usuarioRepository.save(usuario);
         }
 
-        usuarioOptional.get().setToken(new Token(restoranId,categoriaId));
+        usuarioOptional.get().setToken(new Token(restoranId,platoId));
         return usuarioRepository.save(usuarioOptional.get());
     }
 

@@ -1,17 +1,15 @@
 package com.fbfagostousa.resource;
 
-import com.fbfagostousa.domain.core.CategoriaRestoranId;
+import com.fbfagostousa.domain.core.PlatoRestoranId;
 import com.fbfagostousa.domain.core.Restoran;
 import com.fbfagostousa.domain.users.Usuario;
-import com.fbfagostousa.exception.CategoriaIdAndRestoranIdNotFoundException;
-import com.fbfagostousa.exception.CategoriaIdNotFoundException;
-import com.fbfagostousa.exception.CategoriaRestoranIdNotFoundException;
+import com.fbfagostousa.exception.PlatoIdAndRestoranIdNotFoundException;
+import com.fbfagostousa.exception.PlatoIdNotFoundException;
 import com.fbfagostousa.exception.RestoranIdNotFoundException;
-import com.fbfagostousa.service.CategoriaRestoranService;
+import com.fbfagostousa.service.PlatoRestoranService;
 import com.fbfagostousa.service.RestoranService;
 import com.fbfagostousa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +23,7 @@ public class RestoranResource {
     private RestoranService restoranService;
 
     @Autowired
-    private CategoriaRestoranService categoriaRestoranService;
+    private PlatoRestoranService platoRestoranService;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -36,26 +34,26 @@ public class RestoranResource {
         return restoranService.findById(restoranId);
     }
 
-    @GetMapping("{restoranId}/categorias")
-    public List<CategoriaRestoranId>findCategoriasRestoranByRestoranId(@PathVariable Long restoranId) throws RestoranIdNotFoundException {
-        return restoranService.findCategoriasRestoranByRestoranId(restoranId);
+    @GetMapping("{restoranId}/platos")
+    public List<PlatoRestoranId>findPlatosRestoranByRestoranId(@PathVariable Long restoranId) throws RestoranIdNotFoundException {
+        return restoranService.findPlatosRestoranByRestoranId(restoranId);
     }
 
     //El codigo QR redireccionaría por get a esta ruta (restoran + categoría!!)
-    @GetMapping("{restoranId}/categorias/{categoriaId}")
-    public CategoriaRestoranId findCategoriaRestoranIdByCategoriaAndRestoran(@PathVariable Long restoranId,@PathVariable Long categoriaId) throws RestoranIdNotFoundException, CategoriaIdNotFoundException, CategoriaIdAndRestoranIdNotFoundException {
-        return categoriaRestoranService.findCategoriaRestoranIdByCategoriaAndRestoran(categoriaId,restoranId);
+    @GetMapping("{restoranId}/platos/{platoId}")
+    public PlatoRestoranId findPlatoRestoranIdByPlatoAndRestoran(@PathVariable Long restoranId, @PathVariable Long platoId) throws RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
+        return platoRestoranService.findPlatoRestoranIdByPlatoAndRestoran(platoId,restoranId);
     }
 
-    @PostMapping("{restoranId}/categorias/{categoriaId}/login/{email}")
-    public Usuario asd(@PathVariable String email,@PathVariable Long restoranId, @PathVariable Long categoriaId){
-        return usuarioService.IngresarConEmailPosicionadoEnLaCategoriaDeUnRestoranPorSuCodigoQr(email,categoriaId,restoranId);
+    @PostMapping("{restoranId}/platos/{platoId}/login/{email}")
+    public Usuario asd(@PathVariable String email,@PathVariable Long restoranId, @PathVariable Long platoId){
+        return usuarioService.IngresarConEmailPosicionadoEnElPlatoDeUnRestoranPorSuCodigoQr(email,platoId,restoranId);
     }
 
     /*Deprecated! Se debe votar por sus sub-categorías!!
-    @PostMapping("{restoranId}/categorias/{categoriaId}")
-    public CategoriaRestoranId votarPorCategoriaDeUnRestoran(@PathVariable Long restoranId,@PathVariable Long categoriaId) throws CategoriaRestoranIdNotFoundException, RestoranIdNotFoundException, CategoriaIdNotFoundException, CategoriaIdAndRestoranIdNotFoundException {
-        return categoriaRestoranService.votarPorCategoriaDeUnRestoran(categoriaId,restoranId);
+    @PostMapping("{restoranId}/platos/{platoId}")
+    public PlatoRestoranId votarPorCategoriaDeUnRestoran(@PathVariable Long restoranId,@PathVariable Long platoId) throws PlatoRestoranIdNotFoundException, RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
+        return categoriaRestoranService.votarPorCategoriaDeUnRestoran(platoId,restoranId);
     }*/
 
     @GetMapping("/findAll")
