@@ -1,8 +1,8 @@
 package com.fbfagostousa.service;
 
 import com.fbfagostousa.domain.core.Plato;
-import com.fbfagostousa.domain.core.PlatoRestoran;
-import com.fbfagostousa.domain.core.PlatoRestoranId;
+import com.fbfagostousa.domain.core.PlatoRestoranDeprecated;
+import com.fbfagostousa.domain.core.PlatoRestoranIdDeprecated;
 import com.fbfagostousa.domain.core.Restoran;
 import com.fbfagostousa.repository.PlatoRepository;
 import com.fbfagostousa.repository.PlatoRestoranRepository;
@@ -22,7 +22,7 @@ public class Fakemock {
 
     @Autowired
     private RestoranRepository restoranRepository;
-
+/*
     @Autowired
     private PlatoRestoranRepository platoRestoranRepository;
 
@@ -62,18 +62,18 @@ public class Fakemock {
 
 
 
-        PlatoRestoran platoRestoran =new PlatoRestoran();
+        PlatoRestoranDeprecated platoRestoranDeprecated =new PlatoRestoranDeprecated();
+/*
+        PlatoRestoranIdDeprecated platoRestoranIdDeprecated = new PlatoRestoranIdDeprecated(plato1.getId(),restoran1.getId());
+       // platoRestoranDeprecated.setPuntaje(0L);
+        platoRestoranDeprecated.setRestoran(restoran1);
+        platoRestoranDeprecated.setPlato(plato1);
+        platoRestoranDeprecated.setId(platoRestoranIdDeprecated);*/
+/*
 
-        PlatoRestoranId platoRestoranId = new PlatoRestoranId(plato1.getId(),restoran1.getId());
-        platoRestoran.setPuntaje(0L);
-        platoRestoran.setRestoran(restoran1);
-        platoRestoran.setPlato(plato1);
-        platoRestoran.setId(platoRestoranId);
-
-
-        platoRestoranRepository.save(platoRestoran);
+        platoRestoranRepository.save(platoRestoranDeprecated);
 
     }
-
+*/
 
 }

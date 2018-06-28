@@ -15,19 +15,17 @@ public class Restoran  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+/*
     @OneToMany(mappedBy = "restoran")
     @JsonIgnore
-    private List<PlatoRestoran> platos=new ArrayList<>();
+    private List<PlatoRestoranDeprecated> platos=new ArrayList<>();
+    */
 
     @ManyToMany
     private List<Categoria> categorias;
 
     @Column
     private String nombre;
-
-    @OneToMany
-    private List<Garzon> garzones;
 
     @Column
     private String descripcion;
@@ -42,14 +40,14 @@ public class Restoran  implements Serializable {
         this.id = id;
     }
 
-
-    public List<PlatoRestoran> getplatos() {
+/*
+    public List<PlatoRestoranDeprecated> getplatos() {
         return platos;
     }
 
-    public void setplatos(List<PlatoRestoran> platos) {
+    public void setplatos(List<PlatoRestoranDeprecated> platos) {
         this.platos = platos;
-    }
+    }*/
 
     public String getNombre() {
         return nombre;

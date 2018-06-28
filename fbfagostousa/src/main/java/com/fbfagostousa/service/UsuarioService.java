@@ -52,11 +52,11 @@ public class UsuarioService {
         if(!usuarioOptional.isPresent()){
             Usuario usuario= new Usuario();
             usuario.setEmail(lowerCaseEmail);
-            usuario.setToken(new Token(restoranId,platoId));
+         //   usuario.setToken(new Token(restoranId,platoId));
             return usuarioRepository.save(usuario);
         }
 
-        usuarioOptional.get().setToken(new Token(restoranId,platoId));
+//        usuarioOptional.get().setToken(new Token(restoranId,platoId));
         return usuarioRepository.save(usuarioOptional.get());
     }
 

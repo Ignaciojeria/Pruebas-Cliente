@@ -3,11 +3,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-public class PlatoRestoran implements Serializable {
-
+//@Entity
+public class PlatoRestoranDeprecated implements Serializable {
+/*
     @EmbeddedId
-    private PlatoRestoranId id;
+    private PlatoRestoranIdDeprecated id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("restoranId")
@@ -15,23 +15,30 @@ public class PlatoRestoran implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("platoId")
-    private Plato plato;
+    private Plato plato;*/
 
     /*
     @OneToOne
-    private SubCategoria subCategoria;
+    private SubCategoriaDeprecated subCategoria;
 */
 
+    /*
+    @OneToMany
+    private List<Valoracion> valoraciones;
+*/
 
+/*
     @Column
     private Long puntajeTotal;
+    */
 
-    public PlatoRestoran(){}
+/*
+    public PlatoRestoranDeprecated(){}
 
-    public PlatoRestoran(Restoran restoran, Plato plato) {
+    public PlatoRestoranDeprecated(Restoran restoran, Plato plato) {
         this.restoran = restoran;
         this.plato = plato;
-        this.id = new PlatoRestoranId(plato.getId(), restoran.getId());
+        this.id = new PlatoRestoranIdDeprecated(plato.getId(), restoran.getId());
     }
 
     @Override
@@ -41,7 +48,7 @@ public class PlatoRestoran implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        PlatoRestoran that = (PlatoRestoran) o;
+        PlatoRestoranDeprecated that = (PlatoRestoranDeprecated) o;
         return Objects.equals(plato, that.plato) &&
                 Objects.equals(restoran, that.restoran);
     }
@@ -51,11 +58,11 @@ public class PlatoRestoran implements Serializable {
         return Objects.hash(plato, restoran);
     }
 
-    public PlatoRestoranId getId() {
+    public PlatoRestoranIdDeprecated getId() {
         return id;
     }
 
-    public void setId(PlatoRestoranId id) {
+    public void setId(PlatoRestoranIdDeprecated id) {
         this.id = id;
     }
 
@@ -73,13 +80,13 @@ public class PlatoRestoran implements Serializable {
 
     public void setPlato(Plato plato) {
         this.plato = plato;
-    }
-
+    }*/
+/*
     public Long getPuntaje() {
         return puntajeTotal;
     }
 
     public void setPuntaje(Long puntaje) {
         this.puntajeTotal = puntaje;
-    }
+    }*/
 }

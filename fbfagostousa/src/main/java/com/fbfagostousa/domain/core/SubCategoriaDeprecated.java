@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /*@Entity*/
-public class SubCategoria {
+public class SubCategoriaDeprecated {
 /*
     @Id
     private Long id;
@@ -24,7 +24,7 @@ public class SubCategoria {
 
     public String nombre;
 
-    public SubCategoria(){}
+    public SubCategoriaDeprecated(){}
 
     public Long getId() {
         return id;

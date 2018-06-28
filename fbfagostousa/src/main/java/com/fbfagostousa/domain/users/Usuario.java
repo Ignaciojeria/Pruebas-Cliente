@@ -34,6 +34,7 @@ public class Usuario {
     @AttributeOverrides(value = {
             @AttributeOverride(name = "valorToken", column = @Column(name = "valor_token"))
     })
+
     private Token token;
 
     public Long getId() {
@@ -99,4 +100,5 @@ public class Usuario {
     public void setToken(Token token) {
         this.token = token;
     }
+
 }

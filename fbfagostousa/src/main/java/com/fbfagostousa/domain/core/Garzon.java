@@ -1,8 +1,7 @@
 package com.fbfagostousa.domain.core;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Garzon {
@@ -12,6 +11,9 @@ public class Garzon {
 
     @Column
     private String nombre;
+
+    @ManyToOne
+    private Restoran restoran;
 
     public  Garzon(){}
 }

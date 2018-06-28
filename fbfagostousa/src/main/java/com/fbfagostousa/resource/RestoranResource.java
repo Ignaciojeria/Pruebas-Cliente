@@ -1,10 +1,8 @@
 package com.fbfagostousa.resource;
 
-import com.fbfagostousa.domain.core.PlatoRestoranId;
+import com.fbfagostousa.domain.core.PlatoRestoranIdDeprecated;
 import com.fbfagostousa.domain.core.Restoran;
 import com.fbfagostousa.domain.users.Usuario;
-import com.fbfagostousa.exception.PlatoIdAndRestoranIdNotFoundException;
-import com.fbfagostousa.exception.PlatoIdNotFoundException;
 import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.service.PlatoRestoranService;
 import com.fbfagostousa.service.RestoranService;
@@ -34,16 +32,18 @@ public class RestoranResource {
         return restoranService.findById(restoranId);
     }
 
+    /*
     @GetMapping("{restoranId}/platos")
-    public List<PlatoRestoranId>findPlatosRestoranByRestoranId(@PathVariable Long restoranId) throws RestoranIdNotFoundException {
+    public List<PlatoRestoranIdDeprecated>findPlatosRestoranByRestoranId(@PathVariable Long restoranId) throws RestoranIdNotFoundException {
         return restoranService.findPlatosRestoranByRestoranId(restoranId);
-    }
+    }*/
 
-    //El codigo QR redireccionaría por get a esta ruta (restoran + categoría!!)
+    //El codigo QR redireccionaría por get a esta ruta (restoran + plato!!)
+    /*
     @GetMapping("{restoranId}/platos/{platoId}")
-    public PlatoRestoranId findPlatoRestoranIdByPlatoAndRestoran(@PathVariable Long restoranId, @PathVariable Long platoId) throws RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
+    public PlatoRestoranIdDeprecated findPlatoRestoranIdByPlatoAndRestoran(@PathVariable Long restoranId, @PathVariable Long platoId) throws RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
         return platoRestoranService.findPlatoRestoranIdByPlatoAndRestoran(platoId,restoranId);
-    }
+    }*/
 
     @PostMapping("{restoranId}/platos/{platoId}/login/{email}")
     public Usuario asd(@PathVariable String email,@PathVariable Long restoranId, @PathVariable Long platoId){
@@ -52,7 +52,7 @@ public class RestoranResource {
 
     /*Deprecated! Se debe votar por sus sub-categorías!!
     @PostMapping("{restoranId}/platos/{platoId}")
-    public PlatoRestoranId votarPorCategoriaDeUnRestoran(@PathVariable Long restoranId,@PathVariable Long platoId) throws PlatoRestoranIdNotFoundException, RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
+    public PlatoRestoranIdDeprecated votarPorCategoriaDeUnRestoran(@PathVariable Long restoranId,@PathVariable Long platoId) throws PlatoRestoranIdNotFoundException, RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
         return categoriaRestoranService.votarPorCategoriaDeUnRestoran(platoId,restoranId);
     }*/
 

@@ -1,6 +1,6 @@
 package com.fbfagostousa.service.builder;
 
-import com.fbfagostousa.domain.core.PlatoRestoran;
+import com.fbfagostousa.domain.core.PlatoRestoranDeprecated;
 import com.fbfagostousa.domain.core.Restoran;
 
 import java.util.List;
@@ -24,12 +24,12 @@ public class RestoranBuilder {
             this.restoranBuilder.restoran.setDescripcion(descripcion);
             return this;
         }
-
-        public Builder setPlatos(List<PlatoRestoran> platos){
+/*
+        public Builder setPlatos(List<PlatoRestoranDeprecated> platos){
             this.restoranBuilder.restoran.setplatos(platos);
             return this;
         }
-
+*/
         public Restoran build(){
             return restoranBuilder.restoran;
         }

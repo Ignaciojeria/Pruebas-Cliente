@@ -3,20 +3,22 @@ package com.fbfagostousa.domain.core;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.List;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Categoria {
+public class Valoracion {
 
     @Id
     private Long id;
 
     @Column
     private String nombre;
-/*
-    @ManyToMany
-    private List<CaracteristicaDeprecated> caracteristicaDeprecateds;
-    */
 
+    @Column
+    private Long puntaje;
+
+    /*
+    @ManyToOne
+    private PlatoRestoranDeprecated platoRestoranDeprecated;
+*/
 }

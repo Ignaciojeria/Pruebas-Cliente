@@ -31,14 +31,20 @@ public class Plato implements Serializable {
     @ManyToOne
     private Categoria categoria;
 
+    @OneToMany
+    private List<Valoracion> valoraciones;
 
+    @ManyToOne
+    private Restoran restoran;
+
+/*
     @OneToMany(
             mappedBy = "plato",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     @JsonIgnore
-    private List<PlatoRestoran> restorans = new ArrayList<>();
+    private List<PlatoRestoranDeprecated> restorans = new ArrayList<>();*/
 
     @Column
     private String descripcion;
@@ -68,12 +74,12 @@ public class Plato implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public List<PlatoRestoran> getRestorans() {
+/*
+    public List<PlatoRestoranDeprecated> getRestorans() {
         return restorans;
     }
 
-    public void setRestorans(List<PlatoRestoran> restorans) {
+    public void setRestorans(List<PlatoRestoranDeprecated> restorans) {
         this.restorans = restorans;
-    }
+    }*/
 }
