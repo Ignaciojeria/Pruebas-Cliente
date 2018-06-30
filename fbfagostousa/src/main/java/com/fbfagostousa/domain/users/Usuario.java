@@ -1,6 +1,7 @@
 package com.fbfagostousa.domain.users;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -34,7 +35,7 @@ public class Usuario {
     @AttributeOverrides(value = {
             @AttributeOverride(name = "valorToken", column = @Column(name = "valor_token"))
     })
-
+    @JsonIgnore
     private Token token;
 
     public Long getId() {

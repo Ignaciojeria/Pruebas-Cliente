@@ -8,7 +8,6 @@ import com.fbfagostousa.exception.UsuarioValorTokenNotFoundException;
 import com.fbfagostousa.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,7 +31,7 @@ public class UsuarioService {
     //Si el usuario existe, entonces se valida que tenga los campos nombre,telefono,estado,ciudad completados.
     //validar desde el front. Retornaré al usuario!.
 
-    public Usuario ingresarConEmail(String email){
+    public Usuario findByEmail(String email){
         String lowerCaseEmail=email.toLowerCase();
         Optional<Usuario> usuarioOptional= usuarioRepository.findByEmail(lowerCaseEmail);
         if(!usuarioOptional.isPresent()){
@@ -60,6 +59,15 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioOptional.get());
     }
 
+    public Usuario findByEmailInHeaders(HttpHeaders httpHeaders) throws AuthorizationHeaderBadRequestException {
+        if(!httpHeaders.containsKey("email"))
+            throw new AuthorizationHeaderBadRequestException("Debes envíar el email en las cabeceras!. key:'email' value:{$miCorreo@example.com}");
+
+        String email=  httpHeaders.get("email").get(0);
+
+        return this.findByEmail(email);
+    }
+
     public Usuario poblarDatosDeNuevoUsuarioQueEntraIngresandoEmail(HttpHeaders httpHeaders,Usuario requestbody) throws AuthorizationHeaderBadRequestException, UsuarioValorTokenNotFoundException, UserRequestFieldBadRequestException {
 
         if(requestbody.getNombre()==null)
@@ -73,13 +81,7 @@ public class UsuarioService {
         if(requestbody.getCiudad()==null)
             throw new UserRequestFieldBadRequestException("Falta el atributo 'ciudad' en el cuerpo de la solicitud HTTP ");
 
-
-        if(!httpHeaders.containsKey("Authorization"))
-            throw new AuthorizationHeaderBadRequestException("");
-
-        String valorToken=  httpHeaders.get("Authorization").get(0);
-
-       Usuario usuario= this.findByValorToken(valorToken);
+       Usuario usuario= this.findByEmailInHeaders(httpHeaders);
 
        usuario.setNombre(requestbody.getNombre());
        usuario.setTelefono(requestbody.getTelefono());

@@ -1,8 +1,7 @@
 package com.fbfagostousa.service;
 
 import com.fbfagostousa.domain.core.*;
-import com.fbfagostousa.exception.CaracteristicasCategoriaNotFoundException;
-import com.fbfagostousa.exception.PlatoIdNotFoundException;
+import com.fbfagostousa.exception.*;
 import com.fbfagostousa.repository.CaracteristicaRepository;
 import com.fbfagostousa.repository.CategoriaRepository;
 import com.fbfagostousa.repository.PlatoRepository;
@@ -10,6 +9,7 @@ import com.fbfagostousa.repository.RestoranRepository;
 import com.fbfagostousa.service.builder.PlatoBuilder;
 import com.fbfagostousa.service.builder.RestoranBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +38,7 @@ public class Fakemock {
     private PlatoService platoService;
 
 
-    public void votar() throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException {
+    public void votar() throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException, AuthorizationHeaderBadRequestException, HistorialVotacionUsuarioAndPlatoFoundException, UsuarioFieldsNotFoundException {
         List<Caracteristica> caracteristicas=categoriaRepository.getOne(1L).getCaracteristicas();
 
         Caracteristica servicioCasa= caracteristicas.get(0);
@@ -51,13 +51,18 @@ public class Fakemock {
 
         Valoracion valoracion1=new Valoracion();
         valoracion1.setCaracteristica(servicioCasa);
+        valoracion1.setPuntuacion(6L);
         Valoracion valoracion2=new Valoracion();
+        valoracion2.setPuntuacion(10L);
         valoracion2.setCaracteristica(ambienteDeLaCasa);
         Valoracion valoracion3=new Valoracion();
+        valoracion3.setPuntuacion(7L);
         valoracion3.setCaracteristica(saborDelPlato);
         Valoracion valoracion4=new Valoracion();
         valoracion4.setCaracteristica(presentacion);
+        valoracion4.setPuntuacion(8L);
         Valoracion valoracion5=new Valoracion();
+        valoracion5.setPuntuacion(6L);
         valoracion5.setCaracteristica(garzon);
 
         valoraciones.add(valoracion1);
@@ -66,7 +71,10 @@ public class Fakemock {
         valoraciones.add(valoracion4);
         valoraciones.add(valoracion5);
 
-        platoService.votarPorCaracteristicasDeCategoriaDeUnPlato(valoraciones,1L);
+        HttpHeaders httpHeaders=new HttpHeaders();
+        httpHeaders.set("email","ignaciovl.j@gmail.com");
+
+        platoService.votarPorCaracteristicasDeCategoriaDeUnPlato(valoraciones,1L,httpHeaders);
     }
 
     /*
@@ -128,7 +136,7 @@ public class Fakemock {
     }
 
     @GetMapping("test")
-    public void asd() throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException {
+    public void asd() throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException, AuthorizationHeaderBadRequestException, HistorialVotacionUsuarioAndPlatoFoundException, UsuarioFieldsNotFoundException {
         votar();
     }
 

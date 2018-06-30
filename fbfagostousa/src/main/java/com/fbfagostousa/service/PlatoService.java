@@ -1,15 +1,13 @@
 package com.fbfagostousa.service;
 
 import com.fbfagostousa.domain.core.*;
-import com.fbfagostousa.exception.CaracteristicasCategoriaNotFoundException;
-import com.fbfagostousa.exception.PlatoIdAndRestoranIdNotFoundException;
-import com.fbfagostousa.exception.PlatoIdNotFoundException;
-import com.fbfagostousa.exception.RestoranIdNotFoundException;
+import com.fbfagostousa.domain.users.Usuario;
+import com.fbfagostousa.exception.*;
 import com.fbfagostousa.repository.PlatoRepository;
 import com.fbfagostousa.service.builder.ValoracionBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -27,13 +25,16 @@ public class PlatoService {
 
     @Autowired
     private RestoranService restoranService;
-    
+
 
     @Autowired
     private ValoracionService valoracionService;
 
     @Autowired
     private HistorialVotacionService historialVotacionService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     public Plato findById(Long id) throws PlatoIdNotFoundException {
         Optional<Plato> optional= platoRepository.findById(id);
@@ -52,7 +53,20 @@ public class PlatoService {
     }
 
    // @Transactional
-    public List<Valoracion> votarPorCaracteristicasDeCategoriaDeUnPlato(List<Valoracion> valoracionesRequest,Long platoId) throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException {
+    public List<Valoracion> votarPorCaracteristicasDeCategoriaDeUnPlato(List<Valoracion> valoracionesRequest,Long platoId,HttpHeaders httpHeaders) throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException, AuthorizationHeaderBadRequestException, HistorialVotacionUsuarioAndPlatoFoundException, UsuarioFieldsNotFoundException {
+
+        Usuario usuario= this.usuarioService.findByEmailInHeaders(httpHeaders);
+        if(usuario.getNombre()==null)
+            throw new UsuarioFieldsNotFoundException("El atributo 'nombre' del usuario que está intentando realizar una votación es nulo");
+        if(usuario.getCiudad()==null)
+            throw new UsuarioFieldsNotFoundException("El atributo 'ciudad' del usuario que está intentando realizar una votación es nulo");
+        if(usuario.getEstado()==null)
+            throw new UsuarioFieldsNotFoundException("El atributo 'estado' del usuario que está intentando realizar una votación es nulo");
+        if(usuario.getPais()==null)
+            throw new UsuarioFieldsNotFoundException("El atributo 'pais' del usuario que está intentando realizar una votación es nulo");
+        if(usuario.getTelefono()==null)
+            throw new UsuarioFieldsNotFoundException("El atributo 'telefono' del usuario que está intentando realizar una votación es nulo");
+
         List<Caracteristica> caracteristicas=new ArrayList<>();
         Plato plato= this.findById(platoId);
         List<Valoracion> valoraciones=new ArrayList<>();
@@ -60,16 +74,17 @@ public class PlatoService {
         historialVotacion.setPlato(plato);
         historialVotacion.setFechaVotacion(LocalDate.now());
         historialVotacion.setHoraVotacion(LocalTime.now());
-        historialVotacion.setUsuario(null);
-        final HistorialVotacion hitorialVotacionFinal=historialVotacionService.save(historialVotacion);
+        historialVotacion.setUsuario(usuario);
+        final HistorialVotacion hitorialVotacionFinal=historialVotacionService.save(historialVotacion,usuario,plato);
 
         valoracionesRequest.forEach(item->{
             caracteristicas.add(item.getCaracteristica());
             valoraciones.add(new ValoracionBuilder.Builder()
-                                .setValor(item.getValor())
+                                .setPuntuacion(item.getPuntuacion())
                                 .setPlato(plato)
                                 .setHistorialVotacion(hitorialVotacionFinal)
                                 .setCaracteristica(item.getCaracteristica())
+                                .setUsuario(usuario)
                                 .build());
         });
         //Validamos caracteristicas de la categoria del plato

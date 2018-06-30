@@ -1,17 +1,14 @@
 package com.fbfagostousa.resource;
 
-import com.fbfagostousa.domain.core.HistorialVotacion;
-import com.fbfagostousa.domain.core.Plato;
-import com.fbfagostousa.domain.core.PlatoRestoranIdDeprecated;
-import com.fbfagostousa.domain.core.Restoran;
+import com.fbfagostousa.domain.core.*;
 import com.fbfagostousa.domain.users.Usuario;
-import com.fbfagostousa.exception.PlatoIdAndRestoranIdNotFoundException;
-import com.fbfagostousa.exception.RestoranIdNotFoundException;
+import com.fbfagostousa.exception.*;
 import com.fbfagostousa.service.PlatoRestoranService;
 import com.fbfagostousa.service.PlatoService;
 import com.fbfagostousa.service.RestoranService;
 import com.fbfagostousa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,8 +49,8 @@ public class RestoranResource {
     }
 
     @PostMapping("{restoranId}/platos/{platoId}/votar")
-    public HistorialVotacion votar(){
-        return new HistorialVotacion();
+    public List<Valoracion> votarPorCaracteristicasDeCategoriaDeUnPlato(@RequestBody  List<Valoracion> valoracionesRequest,@PathVariable Long platoId,@RequestHeader HttpHeaders headers) throws PlatoIdNotFoundException, AuthorizationHeaderBadRequestException, HistorialVotacionUsuarioAndPlatoFoundException, CaracteristicasCategoriaNotFoundException, UsuarioFieldsNotFoundException {
+        return platoService.votarPorCaracteristicasDeCategoriaDeUnPlato(valoracionesRequest,platoId,headers);
     }
 
     @PostMapping("{restoranId}/platos/{platoId}/login/{email}")

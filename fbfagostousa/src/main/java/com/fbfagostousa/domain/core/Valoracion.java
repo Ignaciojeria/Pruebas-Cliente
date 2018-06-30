@@ -28,15 +28,15 @@ public class Valoracion {
     private HistorialVotacion historialVotacion;
 
     @Column
-    private Long valor;
+    private Long puntuacion;
 
 
-    public Long getValor() {
-        return valor;
+    public Long getPuntuacion() {
+        return puntuacion;
     }
 
-    public void setValor(Long valor) {
-        this.valor = valor;
+    public void setPuntuacion(Long puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
     public Plato getPlato() {
