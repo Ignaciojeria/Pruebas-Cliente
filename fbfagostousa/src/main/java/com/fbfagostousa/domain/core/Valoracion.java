@@ -12,6 +12,7 @@ public class Valoracion {
      * podremos ver si la caracteroistica de la categoría de ese plato existe para poder registrar la valoración */
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -22,6 +23,9 @@ public class Valoracion {
 
     @ManyToOne
     private Usuario usuario;
+
+    @ManyToOne
+    private HistorialVotacion historialVotacion;
 
     @Column
     private Long valor;
@@ -35,7 +39,37 @@ public class Valoracion {
         this.valor = valor;
     }
 
+    public Plato getPlato() {
+        return plato;
+    }
 
+    public void setPlato(Plato plato) {
+        this.plato = plato;
+    }
+
+    public Caracteristica getCaracteristica() {
+        return caracteristica;
+    }
+
+    public void setCaracteristica(Caracteristica caracteristica) {
+        this.caracteristica = caracteristica;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public HistorialVotacion getHistorialVotacion() {
+        return historialVotacion;
+    }
+
+    public void setHistorialVotacion(HistorialVotacion historialVotacion) {
+        this.historialVotacion = historialVotacion;
+    }
 
     /*
     @ManyToOne

@@ -1,5 +1,6 @@
 package com.fbfagostousa.resource;
 
+import com.fbfagostousa.domain.core.HistorialVotacion;
 import com.fbfagostousa.domain.core.Plato;
 import com.fbfagostousa.domain.core.PlatoRestoranIdDeprecated;
 import com.fbfagostousa.domain.core.Restoran;
@@ -48,6 +49,11 @@ public class RestoranResource {
     @GetMapping("{restoranId}/platos/{platoId}")
     public Plato findPlatoRestoranIdByPlatoAndRestoran(@PathVariable Long restoranId, @PathVariable Long platoId) throws RestoranIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
         return platoService.findByIdAndRestoran(platoId,restoranId);
+    }
+
+    @PostMapping("{restoranId}/platos/{platoId}/votar")
+    public HistorialVotacion votar(){
+        return new HistorialVotacion();
     }
 
     @PostMapping("{restoranId}/platos/{platoId}/login/{email}")

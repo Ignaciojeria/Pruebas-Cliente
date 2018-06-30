@@ -2,10 +2,7 @@ package com.fbfagostousa.domain.core;
 
 import com.fbfagostousa.domain.users.Usuario;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -13,6 +10,7 @@ import java.time.LocalTime;
 public class HistorialVotacion {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
@@ -27,5 +25,35 @@ public class HistorialVotacion {
     @Column
     private LocalTime horaVotacion;
 
+    public Plato getPlato() {
+        return plato;
+    }
 
+    public void setPlato(Plato plato) {
+        this.plato = plato;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public LocalDate getFechaVotacion() {
+        return fechaVotacion;
+    }
+
+    public void setFechaVotacion(LocalDate fechaVotacion) {
+        this.fechaVotacion = fechaVotacion;
+    }
+
+    public LocalTime getHoraVotacion() {
+        return horaVotacion;
+    }
+
+    public void setHoraVotacion(LocalTime horaVotacion) {
+        this.horaVotacion = horaVotacion;
+    }
 }

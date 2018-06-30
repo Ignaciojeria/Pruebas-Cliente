@@ -1,6 +1,8 @@
 package com.fbfagostousa.service;
 
 import com.fbfagostousa.domain.core.*;
+import com.fbfagostousa.exception.CaracteristicasCategoriaNotFoundException;
+import com.fbfagostousa.exception.PlatoIdNotFoundException;
 import com.fbfagostousa.repository.CaracteristicaRepository;
 import com.fbfagostousa.repository.CategoriaRepository;
 import com.fbfagostousa.repository.PlatoRepository;
@@ -9,12 +11,15 @@ import com.fbfagostousa.service.builder.PlatoBuilder;
 import com.fbfagostousa.service.builder.RestoranBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RestController
 public class Fakemock {
 
     @Autowired
@@ -29,13 +34,48 @@ public class Fakemock {
     @Autowired
     private CaracteristicaRepository caracteristicaRepository;
 
+    @Autowired
+    private PlatoService platoService;
+
+
+    public void votar() throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException {
+        List<Caracteristica> caracteristicas=categoriaRepository.getOne(1L).getCaracteristicas();
+
+        Caracteristica servicioCasa= caracteristicas.get(0);
+        Caracteristica ambienteDeLaCasa=caracteristicas.get(1);
+        Caracteristica saborDelPlato=caracteristicas.get(2);
+        Caracteristica presentacion=caracteristicas.get(3);
+        Caracteristica garzon=caracteristicas.get(4);
+
+        List<Valoracion> valoraciones=new ArrayList<>();
+
+        Valoracion valoracion1=new Valoracion();
+        valoracion1.setCaracteristica(servicioCasa);
+        Valoracion valoracion2=new Valoracion();
+        valoracion2.setCaracteristica(ambienteDeLaCasa);
+        Valoracion valoracion3=new Valoracion();
+        valoracion3.setCaracteristica(saborDelPlato);
+        Valoracion valoracion4=new Valoracion();
+        valoracion4.setCaracteristica(presentacion);
+        Valoracion valoracion5=new Valoracion();
+        valoracion5.setCaracteristica(garzon);
+
+        valoraciones.add(valoracion1);
+        valoraciones.add(valoracion2);
+        valoraciones.add(valoracion3);
+        valoraciones.add(valoracion4);
+        valoraciones.add(valoracion5);
+
+        platoService.votarPorCaracteristicasDeCategoriaDeUnPlato(valoraciones,1L);
+    }
+
     /*
     @Autowired
     private PlatoRestoranRepositoryDeprecated platoRestoranRepository;
     */
 
     @PostConstruct
-    public void IngresarRestoranesyCategorias(){
+    public void IngresarRestoranesyCategorias() throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException {
         List<Caracteristica> caracteristicas=new ArrayList<>();
         Caracteristica caracteristica1=new Caracteristica();
         caracteristica1.setClave("Servicio de casa");
@@ -85,8 +125,13 @@ public class Fakemock {
         //SobreeEscribimos categoria con el retorno de su id.
         platoRepository.save(plato1);
         platoRepository.save(plato2);
-
     }
+
+    @GetMapping("test")
+    public void asd() throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException {
+        votar();
+    }
+
 
 
 }

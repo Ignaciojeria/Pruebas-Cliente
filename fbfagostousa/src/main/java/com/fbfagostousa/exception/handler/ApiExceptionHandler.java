@@ -21,7 +21,8 @@ public class ApiExceptionHandler {
                        RestoranIdNotFoundException.class,
                         PlatoRestoranIdNotFoundException.class,
                          PlatoIdAndRestoranIdNotFoundException.class,
-                         UsernameNotFoundException.class})
+                         UsernameNotFoundException.class,
+                        CaracteristicasCategoriaNotFoundException.class})
     @ResponseBody
     public ErrorMessage notFoundRequest(HttpServletRequest request, Exception exception){
         return  new ErrorMessage(exception,request.getRequestURI());
