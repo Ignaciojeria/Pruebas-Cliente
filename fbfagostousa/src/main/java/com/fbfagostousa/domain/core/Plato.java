@@ -31,9 +31,6 @@ public class Plato implements Serializable {
     @ManyToOne
     private Categoria categoria;
 
-    @OneToMany
-    private List<Valoracion> valoraciones;
-
     @ManyToOne
     private Restoran restoran;
 
@@ -74,7 +71,25 @@ public class Plato implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-/*
+
+    public Restoran getRestoran() {
+        return restoran;
+    }
+
+    public void setRestoran(Restoran restoran) {
+        this.restoran = restoran;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+
+    /*
     public List<PlatoRestoranDeprecated> getRestorans() {
         return restorans;
     }

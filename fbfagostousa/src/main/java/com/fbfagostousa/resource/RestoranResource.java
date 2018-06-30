@@ -1,10 +1,13 @@
 package com.fbfagostousa.resource;
 
+import com.fbfagostousa.domain.core.Plato;
 import com.fbfagostousa.domain.core.PlatoRestoranIdDeprecated;
 import com.fbfagostousa.domain.core.Restoran;
 import com.fbfagostousa.domain.users.Usuario;
+import com.fbfagostousa.exception.PlatoIdAndRestoranIdNotFoundException;
 import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.service.PlatoRestoranService;
+import com.fbfagostousa.service.PlatoService;
 import com.fbfagostousa.service.RestoranService;
 import com.fbfagostousa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,9 @@ public class RestoranResource {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private PlatoService platoService;
+
 
     @GetMapping("{restoranId}")
     public Restoran findById(@PathVariable Long restoranId) throws RestoranIdNotFoundException {
@@ -39,11 +45,10 @@ public class RestoranResource {
     }*/
 
     //El codigo QR redireccionaría por get a esta ruta (restoran + plato!!)
-    /*
     @GetMapping("{restoranId}/platos/{platoId}")
-    public PlatoRestoranIdDeprecated findPlatoRestoranIdByPlatoAndRestoran(@PathVariable Long restoranId, @PathVariable Long platoId) throws RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
-        return platoRestoranService.findPlatoRestoranIdByPlatoAndRestoran(platoId,restoranId);
-    }*/
+    public Plato findPlatoRestoranIdByPlatoAndRestoran(@PathVariable Long restoranId, @PathVariable Long platoId) throws RestoranIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
+        return platoService.findByIdAndRestoran(platoId,restoranId);
+    }
 
     @PostMapping("{restoranId}/platos/{platoId}/login/{email}")
     public Usuario asd(@PathVariable String email,@PathVariable Long restoranId, @PathVariable Long platoId){

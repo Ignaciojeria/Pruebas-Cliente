@@ -1,6 +1,8 @@
 package com.fbfagostousa.service.builder;
 
+import com.fbfagostousa.domain.core.Categoria;
 import com.fbfagostousa.domain.core.Plato;
+import com.fbfagostousa.domain.core.Restoran;
 
 public class PlatoBuilder {
     /**
@@ -19,6 +21,16 @@ public class PlatoBuilder {
 
         public Builder setNombre(String nombre){
             platoBuilder.plato.setNombre(nombre);
+            return this;
+        }
+
+        public Builder setCategoria(Categoria categoria){
+            platoBuilder.plato.setCategoria(categoria);
+            return this;
+        }
+
+        public Builder setRestoran(Restoran restoran){
+            platoBuilder.plato.setRestoran(restoran);
             return this;
         }
 

@@ -1,6 +1,5 @@
 package com.fbfagostousa.service;
 
-import com.fbfagostousa.repository.PlatoRestoranRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ public class PlatoRestoranService {
     private RestoranService restoranService;
 /*
     @Autowired
-    private PlatoRestoranRepository platoRestoranRepository;
+    private PlatoRestoranRepositoryDeprecated platoRestoranRepository;
 */
     /*
 

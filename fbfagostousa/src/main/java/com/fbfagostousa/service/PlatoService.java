@@ -1,7 +1,10 @@
 package com.fbfagostousa.service;
 
 import com.fbfagostousa.domain.core.Plato;
+import com.fbfagostousa.domain.core.Restoran;
+import com.fbfagostousa.exception.PlatoIdAndRestoranIdNotFoundException;
 import com.fbfagostousa.exception.PlatoIdNotFoundException;
+import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.repository.PlatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,14 @@ public class PlatoService {
             throw new PlatoIdNotFoundException("La plato con el id: ".concat(id.toString()).concat(" no existe"));
 
         return optional.get();
+    }
+
+    public  Plato findByIdAndRestoran(Long id,Long restoranId) throws PlatoIdAndRestoranIdNotFoundException, RestoranIdNotFoundException {
+        Restoran restoran= restoranService.findById(restoranId);
+        Optional<Plato> platoOptional=platoRepository.findByIdAndRestoran(id,restoran);
+        if(!platoOptional.isPresent())
+            throw new PlatoIdAndRestoranIdNotFoundException("El plato con id: ".concat(id.toString()).concat(" no existe en el restoran con id: ").concat(restoranId.toString()));
+        return platoOptional.get();
     }
 
 

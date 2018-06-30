@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 //@Repository
-public interface PlatoRestoranRepository /*extends JpaRepository<PlatoRestoranDeprecated, PlatoRestoranIdDeprecated> */{
+public interface PlatoRestoranRepositoryDeprecated /*extends JpaRepository<PlatoRestoranDeprecated, PlatoRestoranIdDeprecated> */{
 
     /*
     Optional<PlatoRestoranDeprecated> findByRestoranAndPlato(Restoran restoran, Plato plato);
