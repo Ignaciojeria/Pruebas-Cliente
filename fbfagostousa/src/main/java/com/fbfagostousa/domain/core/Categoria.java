@@ -42,4 +42,12 @@ public class Categoria {
     public void setDescripion(String descripion) {
         this.descripion = descripion;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
