@@ -14,4 +14,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     Optional<Usuario> findByValorToken(String valorToken);
 
     Optional<Usuario> findByEmail(String email);
+
+    Optional<Usuario> findByFacebookId(String facebookId);
 }

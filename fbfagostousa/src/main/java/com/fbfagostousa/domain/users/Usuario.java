@@ -1,8 +1,8 @@
 package com.fbfagostousa.domain.users;
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 
 @Entity
 //El cliente puede transportar sólo lo que necesita enviar
@@ -30,6 +30,12 @@ public class Usuario {
 
     @Column
     private String ciudad;
+
+    @Column
+    private String facebookId;
+
+    @Column
+    private String googleId;
 
     @Embedded
     @AttributeOverrides(value = {
@@ -102,4 +108,19 @@ public class Usuario {
         this.token = token;
     }
 
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
+    }
 }
