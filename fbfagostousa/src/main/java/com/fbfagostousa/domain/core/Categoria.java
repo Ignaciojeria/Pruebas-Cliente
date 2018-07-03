@@ -1,11 +1,11 @@
 package com.fbfagostousa.domain.core;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Categoria {
+public class Categoria implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Categoria {
     @OrderColumn(name = "index_id")
     private List<Caracteristica> caracteristicas=new ArrayList<>();*/
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Caracteristica> caracteristicas;
 
 /*

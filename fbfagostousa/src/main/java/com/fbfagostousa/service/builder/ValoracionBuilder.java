@@ -4,7 +4,6 @@ import com.fbfagostousa.domain.core.Caracteristica;
 import com.fbfagostousa.domain.core.HistorialVotacion;
 import com.fbfagostousa.domain.core.Plato;
 import com.fbfagostousa.domain.core.Valoracion;
-import com.fbfagostousa.domain.users.Usuario;
 
 public class ValoracionBuilder {
     Valoracion valoracion = new Valoracion();
@@ -28,11 +27,12 @@ public class ValoracionBuilder {
             return this;
         }
 
+        /*
         public Builder setUsuario(Usuario usuario){
             this.valoracionBuilder.valoracion.setUsuario(usuario);
             return this;
         }
-
+*/
         public Builder setCaracteristica(Caracteristica caracteristica){
             this.valoracionBuilder.valoracion.setCaracteristica(caracteristica);
             return this;

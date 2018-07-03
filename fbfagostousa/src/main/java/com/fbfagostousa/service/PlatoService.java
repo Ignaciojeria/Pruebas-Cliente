@@ -3,11 +3,13 @@ package com.fbfagostousa.service;
 import com.fbfagostousa.domain.core.*;
 import com.fbfagostousa.domain.users.Usuario;
 import com.fbfagostousa.exception.*;
+import com.fbfagostousa.repository.CaracteristicaRepository;
 import com.fbfagostousa.repository.PlatoRepository;
 import com.fbfagostousa.service.builder.ValoracionBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -36,6 +38,9 @@ public class PlatoService {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private CaracteristicaRepository caracteristicaRepository;
+
     public Plato findById(Long id) throws PlatoIdNotFoundException {
         Optional<Plato> optional= platoRepository.findById(id);
         if(!optional.isPresent())
@@ -52,7 +57,7 @@ public class PlatoService {
         return platoOptional.get();
     }
 
-   // @Transactional
+    @Transactional
     public List<Valoracion> votarPorCaracteristicasDeCategoriaDeUnPlato(List<Valoracion> valoracionesRequest,Long platoId,HttpHeaders httpHeaders) throws PlatoIdNotFoundException, CaracteristicasCategoriaNotFoundException, AuthorizationHeaderBadRequestException, HistorialVotacionUsuarioAndPlatoFoundException, UsuarioFieldsNotFoundException {
 
         Usuario usuario= this.usuarioService.findByEmailInHeaders(httpHeaders);
@@ -75,23 +80,38 @@ public class PlatoService {
         historialVotacion.setFechaVotacion(LocalDate.now());
         historialVotacion.setHoraVotacion(LocalTime.now());
         historialVotacion.setUsuario(usuario);
-        final HistorialVotacion hitorialVotacionFinal=historialVotacionService.save(historialVotacion,usuario,plato);
 
         valoracionesRequest.forEach(item->{
-            caracteristicas.add(item.getCaracteristica());
+            //Validación por si alguien se pasa de vergas e intenta asignar puntajes que no son.
+            if(item.getPuntuacion()<6)
+                item.setPuntuacion(6L);
+            if(item.getPuntuacion()>10)
+                item.setPuntuacion(10L);
+
+            Caracteristica caracteristica=caracteristicaRepository.getOne(item.getCaracteristica().getId());
+
+            caracteristicas.add(caracteristica);
             valoraciones.add(new ValoracionBuilder.Builder()
                                 .setPuntuacion(item.getPuntuacion())
                                 .setPlato(plato)
-                                .setHistorialVotacion(hitorialVotacionFinal)
-                                .setCaracteristica(item.getCaracteristica())
-                                .setUsuario(usuario)
+                                //.setHistorialVotacion(hitorialVotacionFinal)
+                                .setCaracteristica(caracteristica)
+                                //.setUsuario(usuario)
                                 .build());
         });
         //Validamos caracteristicas de la categoria del plato
 
         this.validarCaracteristicasDelPlatoEnEvaluacion(caracteristicas,plato);
 
-    return valoracionService.valorarPlato(valoraciones);
+        final HistorialVotacion hitorialVotacionFinal=historialVotacionService.save(historialVotacion,usuario,plato);
+
+        List<Valoracion> valoracionesFinal=new ArrayList<>();
+        valoraciones.forEach(item-> {
+            item.setHistorialVotacion(hitorialVotacionFinal);
+            valoracionesFinal.add(item);
+        });
+
+        return valoracionService.valorarPlato(valoracionesFinal);
     }
 
 

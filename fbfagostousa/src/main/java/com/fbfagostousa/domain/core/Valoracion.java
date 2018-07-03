@@ -1,12 +1,13 @@
 package com.fbfagostousa.domain.core;
 
-import com.fbfagostousa.domain.users.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 @Entity
-public class Valoracion {
+@JsonIgnoreProperties(ignoreUnknown = true)//Ignora propiedades no enviadas en el requestBody de un POST
+public class Valoracion implements Serializable{
 
     /** La valoracion se hace sobre la caracteristica de la categoria de un plato la a partir de lógica de negocio
      * podremos ver si la caracteroistica de la categoría de ese plato existe para poder registrar la valoración */
@@ -21,8 +22,10 @@ public class Valoracion {
     @ManyToOne
     private Caracteristica caracteristica;
 
+    /*
     @ManyToOne
     private Usuario usuario;
+    */
 
     @ManyToOne
     private HistorialVotacion historialVotacion;
@@ -55,13 +58,14 @@ public class Valoracion {
         this.caracteristica = caracteristica;
     }
 
+    /*
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
+    }*/
 
     public HistorialVotacion getHistorialVotacion() {
         return historialVotacion;

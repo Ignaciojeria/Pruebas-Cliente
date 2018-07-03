@@ -1,9 +1,10 @@
 package com.fbfagostousa.domain.core;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Caracteristica {
+public class Caracteristica implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

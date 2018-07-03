@@ -3,11 +3,12 @@ package com.fbfagostousa.domain.core;
 import com.fbfagostousa.domain.users.Usuario;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-public class HistorialVotacion {
+public class HistorialVotacion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

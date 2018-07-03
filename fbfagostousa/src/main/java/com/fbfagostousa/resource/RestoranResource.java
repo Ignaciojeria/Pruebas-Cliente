@@ -1,15 +1,16 @@
 package com.fbfagostousa.resource;
 
-import com.fbfagostousa.domain.core.*;
-import com.fbfagostousa.domain.users.Usuario;
-import com.fbfagostousa.exception.*;
+import com.fbfagostousa.domain.core.Restoran;
+import com.fbfagostousa.exception.RestoranIdNotFoundException;
 import com.fbfagostousa.service.PlatoRestoranService;
 import com.fbfagostousa.service.PlatoService;
 import com.fbfagostousa.service.RestoranService;
 import com.fbfagostousa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -36,6 +37,11 @@ public class RestoranResource {
         return restoranService.findById(restoranId);
     }
 
+    @GetMapping("/findAll")
+    public List<Restoran> findAll(){
+        return restoranService.findAll();
+    }
+
     /*
     @GetMapping("{restoranId}/platos")
     public List<PlatoRestoranIdDeprecated>findPlatosRestoranByRestoranId(@PathVariable Long restoranId) throws RestoranIdNotFoundException {
@@ -43,30 +49,24 @@ public class RestoranResource {
     }*/
 
     //El codigo QR redireccionaría por get a esta ruta (restoran + plato!!)
+/*
     @GetMapping("{restoranId}/platos/{platoId}")
     public Plato findPlatoRestoranIdByPlatoAndRestoran(@PathVariable Long restoranId, @PathVariable Long platoId) throws RestoranIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
         return platoService.findByIdAndRestoran(platoId,restoranId);
-    }
+    }*/
 
-    @PostMapping("{restoranId}/platos/{platoId}/votar")
-    public List<Valoracion> votarPorCaracteristicasDeCategoriaDeUnPlato(@RequestBody  List<Valoracion> valoracionesRequest,@PathVariable Long platoId,@RequestHeader HttpHeaders headers) throws PlatoIdNotFoundException, AuthorizationHeaderBadRequestException, HistorialVotacionUsuarioAndPlatoFoundException, CaracteristicasCategoriaNotFoundException, UsuarioFieldsNotFoundException {
-        return platoService.votarPorCaracteristicasDeCategoriaDeUnPlato(valoracionesRequest,platoId,headers);
-    }
-
+    /* Deprecado
     @PostMapping("{restoranId}/platos/{platoId}/login/{email}")
     public Usuario asd(@PathVariable String email,@PathVariable Long restoranId, @PathVariable Long platoId){
         return usuarioService.IngresarConEmailPosicionadoEnElPlatoDeUnRestoranPorSuCodigoQr(email,platoId,restoranId);
     }
-
+*/
     /*Deprecated! Se debe votar por sus sub-categorías!!
     @PostMapping("{restoranId}/platos/{platoId}")
     public PlatoRestoranIdDeprecated votarPorCategoriaDeUnRestoran(@PathVariable Long restoranId,@PathVariable Long platoId) throws PlatoRestoranIdNotFoundException, RestoranIdNotFoundException, PlatoIdNotFoundException, PlatoIdAndRestoranIdNotFoundException {
         return categoriaRestoranService.votarPorCategoriaDeUnRestoran(platoId,restoranId);
     }*/
 
-    @GetMapping("/findAll")
-    public List<Restoran> findAll(){
-        return restoranService.findAll();
-    }
+
 
 }
