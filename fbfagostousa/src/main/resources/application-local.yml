@@ -1,2 +1,24 @@
+spring:
+  social:
+    facebook:
+      appId: 153281255346134 #Corresponde a la Id de mi sesion de developer en facebook
+      appSecret: 9fe75272ac7fe8165215ff804028e407 #Corresponde a la Pass de la session de api facebook developers
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/fbfagostousa
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+#  jackson:
+#    serialization:
+#      fail-on-empty-beans: false
+
 server:
-  port: 8080 #Puerto por defecto
+  port: 8081
+
+domain: http://localhost:8081 #Lo utiliza facebook para el redireccionamiento
